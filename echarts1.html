@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -39,6 +40,7 @@
         height: 350px;
     }
 </style>
+
 <body>
     <h2>图表实例集合</h2>
     <div class="chart-container">
@@ -61,11 +63,15 @@
             <h3>4.散点图</h3>
             <div id="scatterChart" class="chart"></div>
         </div>
+
+        <div class="chart-box">
+            <h3>5.雷达图</h3>
+            <div id="radarChart" class="chart"></div>
+        </div>
     </div>
     <script>
         //1.
         const lineChart = echarts.init(document.querySelector('#lineChart'));
-
         const lineOption = {
             title: {
                 text: '一周销售数据'
@@ -78,7 +84,7 @@
             },
             xAxis: {
                 type: 'category',
-                ddata: ['周一','周二','周三','周四','周五','周六','周日',]
+                ddata: ['周一', '周二', '周三', '周四', '周五', '周六', '周日',]
             },
             yAxis: {
                 type: 'value',
@@ -86,13 +92,13 @@
             },
             series: [{
                 name: '销售额',
-                data: [120,200,150,80,70,110,130],
+                data: [120, 200, 150, 80, 70, 110, 130],
                 type: 'line',
                 smooth: true,
                 markPoint: {
-                    data:[
-                        { type: 'max', name:'最大值'},
-                        { type: 'min', name: '最小值'},
+                    data: [
+                        { type: 'max', name: '最大值' },
+                        { type: 'min', name: '最小值' },
                     ]
                 }
 
@@ -108,10 +114,10 @@
             tooltip: {
                 trigger: 'item'
             },
-           
+
             xAxis: {
                 type: 'category',
-                ddata: ['部门A','部门B','部门C','部门D','部门 E']
+                ddata: ['部门A', '部门B', '部门C', '部门D', '部门 E']
             },
             yAxis: {
                 type: 'value',
@@ -119,7 +125,7 @@
             },
             series: [{
                 name: '人数',
-                data: [5,20,36,10,10],
+                data: [5, 20, 36, 10, 10],
                 type: 'bar',
                 label: {
                     show: true,
@@ -131,7 +137,7 @@
                         return colors[params.dataIndex];
                     }
                 }
-      
+
             }]
         };
         barChart.setOption(barOption);
@@ -149,7 +155,7 @@
             legend: {
                 orient: 'vertical',
                 left: 'left',
-                data: ['直接访问','邮件营销','联盟广告','视频广告','搜索引擎']
+                data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎']
             },
             series: [{
                 name: '访问来源',
@@ -159,31 +165,30 @@
                 data: [{
                     value: 335,
                     name: '直接访问'
-                 },
-                 {
+                },
+                {
                     value: 310,
                     name: '邮件营销'
-                 },
-                 {
+                },
+                {
                     value: 234,
                     name: '联盟广告'
-                 },
-                 {
+                },
+                {
                     value: 135,
                     name: '视频广告'
-                 },
-                 {
+                },
+                {
                     value: 1548,
                     name: '搜索引擎'
-                 }
-            ]
-               
+                }
+                ]
+
             }]
         };
         pieChart.setOption(pieOption);
         //4.
         const scatterChart = echarts.init(document.querySelector('#scatterChart'));
-
         const scatterOption = {
             title: {
                 text: '身高体重分布'
@@ -194,13 +199,13 @@
                     return '身高: ${params.value[0]} cm<br/>体重: ${params.value[1]} kg';
                 }
             },
-         
+
             xAxis: {
                 type: 'value',
                 name: '身高(cm)',
                 min: 140,
                 max: 200
-                
+
             },
             yAxis: {
                 type: 'value',
@@ -211,13 +216,13 @@
             series: [{
                 name: '身高体重',
                 data: [
-                    [143,85],
-                    [152,55],
-                    [158,90],
-                    [166,60],
-                    [162,55],
-                    [180,70],
-                    [175,80]
+                    [143, 85],
+                    [152, 55],
+                    [158, 90],
+                    [166, 60],
+                    [162, 55],
+                    [180, 70],
+                    [175, 80]
                 ],
                 type: 'scatter',
                 symbolSize: 15,
@@ -227,12 +232,52 @@
             }]
         };
         scatterChart.setOption(scatterOption);
+        //5.
+        const radarChart = echarts.init(document.querySelector('#radarChart'));
+        const radarOption = {
+            title: {
+                text: 'Basic Radar Chart'
+            },
+            legend: {
+                data: ['Allocated Budget', 'Actual Spending']
+            },
+            radar: {
+                // shape: 'circle',
+                indicator: [
+                    { name: 'Sales', max: 6500 },
+                    { name: 'Administration', max: 16000 },
+                    { name: 'Information Technology', max: 30000 },
+                    { name: 'Customer Support', max: 38000 },
+                    { name: 'Development', max: 52000 },
+                    { name: 'Marketing', max: 25000 }
+                ]
+            },
+            series: [
+                {
+                    name: 'Budget vs spending',
+                    type: 'radar',
+                    data: [
+                        {
+                            value: [4200, 3000, 20000, 35000, 50000, 18000],
+                            name: 'Allocated Budget'
+                        },
+                        {
+                            value: [5000, 14000, 28000, 26000, 42000, 21000],
+                            name: 'Actual Spending'
+                        }
+                    ]
+                }
+            ]
+        };
+        radarChart.setOption(radarOption);
         window.addEventListener('resize', function () {
             lineChart.resize();
             barChart.resize();
             pieChart.resize();
             scatterChart.resize();
+            radarChart.resize();
         });
     </script>
 </body>
-</html>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+
+</html>
